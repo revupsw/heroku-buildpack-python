@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# This script serves as the Statics package (Numpy/Scipy/Scikit-learn) build step of the
+# [**Python Buildpack**](https://github.com/heroku/heroku-buildpack-python) 
+# compiler. 
+# 
+# A [buildpack](http://devcenter.heroku.com/articles/buildpacks) is an 
+# adapter between a Python application and Heroku's runtime.
+#
+# This script is invoked by [`bin/compile`](/).
+
+export PATH="$BUILD_DIR/.apt/usr/bin/:$PATH"
+
+LIB_HOME="$BUILD_DIR/.apt/usr/lib"
+GCC_DIR=$(gcc --version | grep ^gcc | sed 's/^.* //g' | sed 's/\.[0-9]\+$//g')
+GCC_HOME="$LIB_HOME/gcc/x86_64-linux-gnu/$GCC_DIR"
+
+echo $'\n'/usr/bin directory
+ls $BUILD_DIR/.apt/usr/bin/
+echo $'\n'/usr/lib directory
+ls ${LIB_HOME}
+echo $'\n'gcc home ${GCC_DIR}
+ls ${GCC_HOME}
+
+export ATLAS=${LIB_HOME}/libatlas.so
+export BLAS=${LIB_HOME}/atlas/libblas.so
+export LAPACK=${LIB_HOME}/atlas/liblapack.so
+export LIBRARY_PATH=${LIB_HOME}:${LIB_HOME}/atlas:${GCC_HOME}:${LIBRARY_PATH}
+export LD_LIBRARY_PATH=${LIB_HOME}:${LIB_HOME}/atlas:${GCC_HOME}:${LD_LIBRARY_PATH}
+export PATH="$BUILD_DIR/.apt/usr/bin/:$GCC_HOME:$PATH"

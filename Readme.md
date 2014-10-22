@@ -1,7 +1,45 @@
-Heroku buildpack: Python
+Heroku buildpack: Python with Numpy, Scipy, scikit-learn
 ========================
 
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/).
+
+This buildpack enables you to compile Numpy, Scipy, scikit-lern etc on Heroku.  
+
+Usage of this buildpack 
+-----
+
+1.use [heroku-buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi)  
+
+```
+$ heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+```
+
+(You can set buildpack when creating the app. please see the [official document](https://devcenter.heroku.com/articles/buildpacks).)
+
+2.edit `.buildpacks` for heroku-buildpack-multi as below.
+
+```   
+https://github.com/ddollar/heroku-buildpack-apt
+https://github.com/icoxfog417/heroku-buildpack-python.git#statistics
+```
+    
+3.edit `Aptfile` for [heroku-buildpack-apt](https://github.com/ddollar/heroku-buildpack-apt) as below.
+
+```
+build-essential
+gfortran
+python-all-dev
+python3-all-dev
+liblapack-dev
+libatlas-base-dev
+cython
+```
+
+4.locate `.buildpacks` and `Aptfile` to your application root, then push to heroku.
+
+**Caution:**
+Scipy takes long time to compile. So Numpy, Scipy, scikit-learn at once will cause compile timeout on Heroku.  
+To avoid it, exclude scikit-learn from your `requirements.txt` on first push, after that restore it and push again.
 
 
 Usage

@@ -165,6 +165,9 @@ source $BIN_DIR/steps/pylibmc
 # Libffi support.
 source $BIN_DIR/steps/cryptography
 
+# Prepare installation of statistic packages
+source $BIN_DIR/steps/statics
+
 # Install dependencies with Pip.
 source $BIN_DIR/steps/pip-install
 
