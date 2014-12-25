@@ -8,10 +8,10 @@ This buildpack enables you to compile Numpy, Scipy, scikit-lern etc on Heroku.
 Usage of this buildpack 
 -----
 
-1.use [heroku-buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi)  
+1.use [heroku-buildpack-multi](https://github.com/heroku/heroku-buildpack-multi.git)  
 
 ```
-$ heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+$ heroku config:add BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git
 ```
 
 (You can set buildpack when creating the app. please see the [official document](https://devcenter.heroku.com/articles/buildpacks).)
