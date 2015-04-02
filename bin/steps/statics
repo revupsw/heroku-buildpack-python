@@ -9,22 +9,26 @@
 #
 # This script is invoked by [`bin/compile`](/).
 
-export PATH="$BUILD_DIR/.apt/usr/bin/:$PATH"
-
-LIB_HOME="$BUILD_DIR/.apt/usr/lib"
+LIB_HOME=$BUILD_DIR/.apt/usr/lib
 GCC_DIR=$(gcc --version | grep ^gcc | sed 's/^.* //g' | sed 's/\.[0-9]\+$//g')
-GCC_HOME="$LIB_HOME/gcc/x86_64-linux-gnu/$GCC_DIR"
+GNU_LIB=$LIB_HOME/x86_64-linux-gnu
+GCC_ADDON=$LIB_HOME/gcc/x86_64-linux-gnu/$GCC_DIR
+
+GCC_ORIGIN=/usr/lib/gcc/x86_64-linux-gnu/$GCC_DIR
+cp -uR $GCC_ORIGIN/. $GCC_ADDON/
 
 echo $'\n'/usr/bin directory
 ls $BUILD_DIR/.apt/usr/bin/
 echo $'\n'/usr/lib directory
-ls ${LIB_HOME}
-echo $'\n'gcc home ${GCC_DIR}
-ls ${GCC_HOME}
+ls $LIB_HOME
+echo $'\n'gnu lib
+ls $GNU_LIB
+echo $'\n'gcc addon ${GCC_DIR}
+ls $GCC_ADDON
 
-export ATLAS=${LIB_HOME}/libatlas.so
-export BLAS=${LIB_HOME}/atlas/libblas.so
-export LAPACK=${LIB_HOME}/atlas/liblapack.so
-export LIBRARY_PATH=${LIB_HOME}:${LIB_HOME}/atlas:${GCC_HOME}:${LIBRARY_PATH}
-export LD_LIBRARY_PATH=${LIB_HOME}:${LIB_HOME}/atlas:${GCC_HOME}:${LD_LIBRARY_PATH}
-export PATH="$BUILD_DIR/.apt/usr/bin/:$GCC_HOME:$PATH"
+export BLAS=$LIB_HOME/libblas/libblas.so
+export LAPACK=$LIB_HOME/lapack/liblapack.so
+export ATLAS=$LIB_HOME/libatlas.so
+export LIBRARY_PATH=$LIB_HOME:$LIB_HOME/libblas/:$LIB_HOME/lapack/:$GNU_LIB/:$GCC_ADDON/:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$LIB_HOME:$LIB_HOME/libblas/:$LIB_HOME/lapack/:$GNU_LIB/:$GCC_ADDON/:$LD_LIBRARY_PATH
+export PATH=$BUILD_DIR/.apt/usr/bin/:$GCC_ADDON/:$PATH
