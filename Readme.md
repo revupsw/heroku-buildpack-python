@@ -4,6 +4,7 @@ Heroku buildpack: Python with Numpy, Scipy, scikit-learn
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/).
 
 This buildpack enables you to compile Numpy, Scipy, scikit-lern etc on Heroku.  
+! I recommends you to use [`conda-buildpack`](https://github.com/kennethreitz/conda-buildpack). Because of compile timeout issue (see below).  
 
 Usage of this buildpack 
 -----
@@ -28,9 +29,9 @@ https://github.com/icoxfog417/heroku-buildpack-python.git#statistics
 ```
 build-essential
 gfortran
-python-all-dev
-python3-all-dev
-liblapack-dev
+libgfortran3
+python-dev
+libblas-dev
 libatlas-base-dev
 cython
 ```
