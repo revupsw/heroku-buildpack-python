@@ -19,12 +19,15 @@ cp -uR $GCC_ORIGIN/. $GCC_ADDON/
 
 echo $'\n'/usr/bin directory
 ls $BUILD_DIR/.apt/usr/bin/
-echo $'\n'/usr/lib directory
+echo $'\n'${LIB_HOME} aka /usr/lib directory
 ls $LIB_HOME
 echo $'\n'gnu lib
 ls $GNU_LIB
 echo $'\n'gcc addon ${GCC_DIR}
 ls $GCC_ADDON
+
+echo $'\n'/app/ contents
+ls -A /app
 
 export BLAS=$LIB_HOME/libblas/libblas.so
 export LAPACK=$LIB_HOME/lapack/liblapack.so

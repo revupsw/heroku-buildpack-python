@@ -3,7 +3,7 @@
 # Usage:
 #
 #     $ bin/compile <build-dir> <cache-dir> <env-path>
-
+set -x
 # Fail fast and fail hard.
 set -eo pipefail
 
