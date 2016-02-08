@@ -26,9 +26,10 @@ ls $GNU_LIB
 echo $'\n'gcc addon ${GCC_DIR}
 ls $GCC_ADDON
 
-export BLAS=$LIB_HOME/libblas/libblas.so
-export LAPACK=$LIB_HOME/lapack/liblapack.so
-export ATLAS=$LIB_HOME/libatlas.so
-export LIBRARY_PATH=$LIB_HOME:$LIB_HOME/libblas/:$LIB_HOME/lapack/:$GNU_LIB/:$GCC_ADDON/:$LIBRARY_PATH
-export LD_LIBRARY_PATH=$LIB_HOME:$LIB_HOME/libblas/:$LIB_HOME/lapack/:$GNU_LIB/:$GCC_ADDON/:$LD_LIBRARY_PATH
+
+#export BLAS=$LIB_HOME/libblas/libblas.so
+#export LAPACK=$LIB_HOME/lapack/liblapack.so
+#export ATLAS=$LIB_HOME/libatlas.so
+export LIBRARY_PATH=$LIB_HOME:$GNU_LIB/:$GCC_ADDON/:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$LIB_HOME:$GNU_LIB/:$GCC_ADDON/:$LD_LIBRARY_PATH
 export PATH=$BUILD_DIR/.apt/usr/bin/:$GCC_ADDON/:$PATH
